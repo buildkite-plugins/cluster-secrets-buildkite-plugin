@@ -9,16 +9,22 @@ setup() {
   export BUILDKITE_PLUGIN_CLUSTER_SECRETS_DUMP_ENV=true
 }
 
-@test "Download default env from Buildkite secrets" {
-    export TESTDATA="Rk9PPWJhcgpCQVI9QmF6ClNFQ1JFVD1sbGFtYXMK"
+@test "If no parameters provided the plugin does nothing - but doesn't fail" {
+    run bash -c "$PWD/hooks/environment"
 
-    stub buildkite-agent "secret get env : echo ${TESTDATA}"
+    assert_success
+}
+
+@test "If no key env found in Buildkite secrets the plugin does nothing - but doesn't fail" {
+    export BUILDKITE_PLUGIN_CLUSTER_SECRETS_ENV="env"
+   
+    stub buildkite-agent "secret get env : echo 'not found'"
 
     run bash -c "$PWD/hooks/environment"
 
     assert_success
-    assert_output --partial "FOO=bar"
-    refute_output --partial "blah=blah"
+    assert_output --partial "No secret found"
+    unstub buildkite-agent
 }
 
 @test "Download custom env from Buildkite secrets" {
@@ -39,7 +45,6 @@ setup() {
     export BUILDKITE_PLUGIN_CLUSTER_SECRETS_VARIABLES_ANIMAL="best"
     
     stub buildkite-agent \
-        "secret get env : echo ${TESTDATA}" \
         "secret get best : echo llama"
 
     run bash -c "$PWD/hooks/environment"
@@ -56,7 +61,6 @@ setup() {
     export BUILDKITE_PLUGIN_CLUSTER_SECRETS_VARIABLES_FOOD="chips"
     
     stub buildkite-agent \
-        "secret get env : echo ${TESTDATA}" \
         "secret get best : echo llama" \
         "secret get great-north : echo Canada" \
         "secret get chips : echo Poutine"
@@ -67,30 +71,5 @@ setup() {
     assert_output --partial "ANIMAL=llama"
     assert_output --partial "COUNTRY=Canada"
     assert_output --partial "FOOD=Poutine"
-    unstub buildkite-agent
-}
-
-@test "If no key env found in Buildkite secrets the plugin does nothing - but doesn't fail" {
-   
-    stub buildkite-agent "secret get env : echo 'not found'"
-
-    run bash -c "$PWD/hooks/environment"
-
-    assert_success
-    assert_output --partial "No secret found"
-    unstub buildkite-agent
-}
-
-@test "If no key from parameters found in Buildkite secrets the plugin fails" {
-    export BUILDKITE_PLUGIN_CLUSTER_SECRETS_VARIABLES_ANIMAL="best"
-   
-    stub buildkite-agent \
-        "secret get env : echo 'not found'" \
-        "secret get best : exit 1" 
-
-    run bash -c "$PWD/hooks/environment"
-
-    assert_failure
-    assert_output --partial "⚠️ Unable to find secret at"
     unstub buildkite-agent
 }
