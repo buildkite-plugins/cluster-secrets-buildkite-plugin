@@ -1,5 +1,5 @@
-[!IMPORTANT]
-This plugin has been deprecated. Please use the [Secrets Buildkite Plugin](https://github.com/buildkite-plugins/secrets-buildkite-plugin)
+**⚠️ Important**
+This plugin has been deprecated, and will no longer receive updates. Please use the [Secrets Buildkite Plugin](https://github.com/buildkite-plugins/secrets-buildkite-plugin) in your pipelines.
 
 # Secrets Buildkite Plugin
 
