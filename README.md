@@ -1,12 +1,15 @@
-# Cluster Secrets Buildkite Plugin
+[!IMPORTANT]
+This plugin has been deprecated. Please use the [Secrets Buildkite Plugin](https://github.com/buildkite-plugins/secrets-buildkite-plugin)
 
-A Buildkite plugin used to fetch secrets from [Buildkite Secrets](https://buildkite.com/docs/pipelines/security/secrets/buildkite-secrets),
+# Secrets Buildkite Plugin
+
+A Buildkite plugin used to fetch secrets from [Buildkite Secrets](https://buildkite.com/docs/pipelines/security/secrets/buildkite-secrets)
 
 ## Storing Secrets
 
 There are two options for storing and fetching secrets.
 
-You can create a secret in your Buildkite cluster(s) from the Buildkite UI following the instructions in the documentation [here](https://buildkite.com/docs/pipelines/security/secrets/buildkite-secrets#create-a-secret-using-the-buildkite-interface).
+You can create a secret in the Buildkite UI following the instructions in the documentation [here](https://buildkite.com/docs/pipelines/security/secrets/buildkite-secrets#create-a-secret-using-the-buildkite-interface).
 
 ### One at a time
 
@@ -18,7 +21,7 @@ A `pipeline.yml` like this will read each secret out into a ENV variable:
 steps:
   - command: echo "The content of ANIMAL is \$ANIMAL"
     plugins:
-      - cluster-secrets#v1.0.0:
+      - secrets#v1.0.0:
           variables:
             ANIMAL: llamas
             FOO: bar
@@ -26,7 +29,7 @@ steps:
 
 ### Multiple
 
-Create a single Buildkite secret with one variable per line, encoded as base64 for storage. 
+Create a single Buildkite secret with one variable per line, encoded as base64 for storage.
 
 For example, setting three variables looks like this in a file:
 
@@ -50,7 +53,7 @@ job environment using a pipeline.yml like this:
 steps:
   - command: build.sh
     plugins:
-      - cluster-secrets#v1.0.0:
+      - secrets#v1.0.0:
           env: "llamas"
 ```
 
