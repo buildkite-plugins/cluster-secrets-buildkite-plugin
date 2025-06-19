@@ -1,5 +1,5 @@
 **⚠️ Important**
-This plugin has been deprecated, and will no longer receive updates. Please use the [Secrets Buildkite Plugin](https://github.com/buildkite-plugins/secrets-buildkite-plugin) in your pipelines.
+This plugin is no longer maintained and has been deprecated. Secrets are no longer scoped to individual clusters, making this plugin unnecessary. Please use the [Secrets Buildkite Plugin](https://github.com/buildkite-plugins/secrets-buildkite-plugin) for managing secrets in your pipelines.
 
 # Secrets Buildkite Plugin
 
