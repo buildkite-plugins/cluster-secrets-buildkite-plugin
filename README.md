@@ -21,7 +21,7 @@ A `pipeline.yml` like this will read each secret out into a ENV variable:
 steps:
   - command: echo "The content of ANIMAL is \$ANIMAL"
     plugins:
-      - secrets#v1.0.0:
+      - cluster-secrets#v1.0.0:
           variables:
             ANIMAL: llamas
             FOO: bar
@@ -53,7 +53,7 @@ job environment using a pipeline.yml like this:
 steps:
   - command: build.sh
     plugins:
-      - secrets#v1.0.0:
+      - cluster-secrets#v1.0.0:
           env: "llamas"
 ```
 
