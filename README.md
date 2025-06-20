@@ -1,12 +1,15 @@
-# Cluster Secrets Buildkite Plugin
+**⚠️ Important**
+This plugin is no longer maintained and has been deprecated. Secrets are no longer scoped to individual clusters, making this plugin unnecessary. Please use the [Secrets Buildkite Plugin](https://github.com/buildkite-plugins/secrets-buildkite-plugin) for managing secrets in your pipelines.
 
-A Buildkite plugin used to fetch secrets from [Buildkite Secrets](https://buildkite.com/docs/pipelines/security/secrets/buildkite-secrets),
+# Secrets Buildkite Plugin
+
+A Buildkite plugin used to fetch secrets from [Buildkite Secrets](https://buildkite.com/docs/pipelines/security/secrets/buildkite-secrets)
 
 ## Storing Secrets
 
 There are two options for storing and fetching secrets.
 
-You can create a secret in your Buildkite cluster(s) from the Buildkite UI following the instructions in the documentation [here](https://buildkite.com/docs/pipelines/security/secrets/buildkite-secrets#create-a-secret-using-the-buildkite-interface).
+You can create a secret in the Buildkite UI following the instructions in the documentation [here](https://buildkite.com/docs/pipelines/security/secrets/buildkite-secrets#create-a-secret-using-the-buildkite-interface).
 
 ### One at a time
 
@@ -26,7 +29,7 @@ steps:
 
 ### Multiple
 
-Create a single Buildkite secret with one variable per line, encoded as base64 for storage. 
+Create a single Buildkite secret with one variable per line, encoded as base64 for storage.
 
 For example, setting three variables looks like this in a file:
 
