@@ -34,9 +34,7 @@ buildkite_agent_secret_get_with_retry() {
       return 0
     fi
 
-    # TODO: Remove this and restore the line below after testing
-    # if echo "$OUTPUT" | grep -qiE "(not found|unauthorized|forbidden|bad request)"; then
-    if echo "$OUTPUT" | grep -qiE "(unauthorized|forbidden|bad request)"; then
+    if echo "$OUTPUT" | grep -qiE "(not found|unauthorized|forbidden|bad request)"; then
       echo "$OUTPUT"
       return "$EXIT_CODE"
     fi
