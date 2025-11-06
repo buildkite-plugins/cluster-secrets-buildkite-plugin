@@ -18,7 +18,7 @@ calculate_backoff_delay() {
 buildkite_agent_secret_get_with_retry() {
   local KEY="$1"
   local MAX_ATTEMPTS="${BUILDKITE_PLUGIN_CLUSTER_SECRETS_RETRY_MAX_ATTEMPTS:-5}"
-  local BASE_DELAY="${BUILDKITE_PLUGIN_CLUSTER_SECRETS_RETRY_BASE_DELAY:-1}"
+  local BASE_DELAY="${BUILDKITE_PLUGIN_CLUSTER_SECRETS_RETRY_BASE_DELAY:-2}"
   local ATTEMPT=1
   local EXIT_CODE
   local OUTPUT

@@ -15,5 +15,5 @@ configuration:
       default: 5
     retry-base-delay:
       type: number
-      default: 1
+      default: 2
 additionalProperties: false
