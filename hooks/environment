@@ -1,6 +1,20 @@
 #!/bin/bash
 set -euo pipefail
 
+calculate_backoff_delay() {
+  local BASE_DELAY="$1"
+  local ATTEMPT="$2"
+  local DELAY=$((BASE_DELAY * (2 ** (ATTEMPT - 1))))
+  local JITTER=$((RANDOM % (DELAY / 4 + 1)))
+  local TOTAL_DELAY=$((DELAY + JITTER))
+
+  if [ "$TOTAL_DELAY" -gt 60 ]; then
+    TOTAL_DELAY=60
+  fi
+
+  echo "$TOTAL_DELAY"
+}
+
 # downloads the secret by provided key using the buildkite-agent secret command
 downloadSecret() {
     local key=$1
